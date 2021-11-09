@@ -1,6 +1,6 @@
 
 all:
-	clang++ -Wall -Wextra -Werror testers/*.cpp -std=c++98
+	clang++ -Wall -Wextra -Werror -fsanitize=address testers/*.cpp -std=c++98
 
 fclean:
 	rm -rf a.out

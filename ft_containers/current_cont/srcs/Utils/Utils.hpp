@@ -7,10 +7,6 @@
 # include "ReverseIterator.hpp"
 # include "RandomIterator.hpp"
 
-# ifndef __APPLE__
-#  define __APPLE__ 0
-# endif
-
 namespace ft
 {
 
@@ -102,11 +98,6 @@ namespace ft
 	template<class T>
 	struct node
 	{
-		private:
-			bool _unused;
-			#if __APPLE__ == 0
-				int _unused_linux;
-			#endif
 		public:
 			T		tab;
 			node	*right;

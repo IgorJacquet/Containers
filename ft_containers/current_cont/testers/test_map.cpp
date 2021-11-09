@@ -12,6 +12,7 @@
 
 #include "tester.hpp"
 #include <map>
+#include <sys/time.h>
 
 template <class Key, class Val>
 void print_map_values(ft::map<Key, Val> &m, std::string name)
@@ -41,6 +42,11 @@ void print_vraie_map_values(std::map<Key, Val> &m, std::string name)
 
 void insert_map_values(ft::map<int, std::string> &m, std::map<int, std::string> &m2)
 {
+	struct timeval    todms;
+
+    gettimeofday(&todms, NULL);
+    std::cout << "Base time = " << todms.tv_usec << std::endl;
+
 	ft::pair <int,std::string>			foo;
   	ft::pair <int,std::string>			bar;
 	ft::pair <int,std::string>			foo1;
@@ -63,6 +69,9 @@ void insert_map_values(ft::map<int, std::string> &m, std::map<int, std::string> 
 	m.insert(bar2);
 
 
+    gettimeofday(&todms, NULL);
+    std::cout << "Time 1 = " << todms.tv_usec << std::endl;
+
 	
 	std::pair <int,std::string>			foo3;
   	std::pair <int,std::string>			bar3;
@@ -84,6 +93,9 @@ void insert_map_values(ft::map<int, std::string> &m, std::map<int, std::string> 
 	m2.insert(bar4);
 	m2.insert(foo5);
 	m2.insert(bar5);
+	
+    gettimeofday(&todms, NULL);
+    std::cout << "Time 2 = " << todms.tv_usec << std::endl;
 }
 
 static bool	check_it(ft::map<int, std::string>::iterator myIt, ft::map<int, std::string>::iterator myEnd, std::map<int, std::string>::iterator realIt)
@@ -383,8 +395,6 @@ void	test_map_operations()
 
 	insert_map_values(my1, real1);
 
-
-
 	check("Find", (my1.find(1))->second, (real1.find(1))->second);
 	check("Find", (my1.find(6))->second, (real1.find(6))->second);
 	check("Find not found", (my1.find(30) == my1.end()), (real1.find(30) == real1.end()));
@@ -416,6 +426,11 @@ void	test_map_operations()
 void	test_map()
 {
 	print_header("MAP");
+
+	struct timeval    todms;
+
+    gettimeofday(&todms, NULL);
+    std::cout << "Global time start : " << todms.tv_usec << std::endl;
 	
 	test_map_iterators();
 	P("");
@@ -437,4 +452,7 @@ void	test_map()
 	P("");
 	test_map_operations();
 	P("");
+
+    gettimeofday(&todms, NULL);
+    std::cout << "Global start end : " << todms.tv_usec << std::endl;
 }

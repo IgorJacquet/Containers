@@ -26,7 +26,6 @@
 
 # include "../srcs/Map/Map.hpp"
 # include "../srcs/Map/MapIterator.hpp"
-# include "../srcs/Map/Map_functions.hpp"
 # include "../srcs/Stack/Stack.hpp"
 # include "../srcs/Stack/Stack_functions.hpp"
 # include "../srcs/Utils/RandomIterator.hpp"

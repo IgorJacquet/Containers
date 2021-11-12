@@ -46,6 +46,7 @@ namespace ft
 		}
 		return (first2 != last2);
 	}
+
 	template <class InputIterator1, class InputIterator2, class Compare>
 	bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1,
 		InputIterator2 first2, InputIterator2 last2, Compare comp)
@@ -58,6 +59,7 @@ namespace ft
 		}
 		return (first2 != last2);
 	}
+
 	template <class InputIterator1, class InputIterator2>
 	bool equal (InputIterator1 first1, InputIterator1 last1,
 		InputIterator2 first2)
@@ -70,6 +72,7 @@ namespace ft
 		}
 		return true;
 	}
+
 	template <class InputIterator1, class InputIterator2, class BinaryPredicate>
 	bool equal (InputIterator1 first1, InputIterator1 last1,
 		InputIterator2 first2, BinaryPredicate pred)
@@ -95,14 +98,14 @@ namespace ft
 		}
 		return i;
 	}
+
 	template<class T>
 	struct node
 	{
-		public:
-			T		tab;
-			node	*right;
-			node	*left;
-			node	*parent;
+		T		tab;
+		node	*right;
+		node	*left;
+		node	*parent;
 	};
 
 	template<typename T>
@@ -137,25 +140,46 @@ namespace ft
 	};
 
 template <class T1, class T2>
-bool operator==(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) { return (lhs.first == rhs.first && lhs.second == rhs.second); };
+bool operator==(const pair<T1,T2>& p1, const pair<T1,T2>& p2)
+{
+	return (p1.first == p2.first && p1.second == p2.second);
+}
 
 template <class T1, class T2>
-bool operator!=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) { return (lhs.first == rhs.first && lhs.second == rhs.second); };
+bool operator!=(const pair<T1,T2>& p1, const pair<T1,T2>& p2)
+{
+	return (p1.first == p2.first && p1.second == p2.second);
+}
 
 template <class T1, class T2>
-bool operator<(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) { return (lhs.first < rhs.first && lhs.second < rhs.second); };
+bool operator<(const pair<T1,T2>& p1, const pair<T1,T2>& p2)
+{
+	return (p1.first < p2.first && p1.second < p2.second); 
+}
 
 template <class T1, class T2>
-bool operator<=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) { return (lhs.first <= rhs.first && lhs.second <= rhs.second); };
+bool operator<=(const pair<T1,T2>& p1, const pair<T1,T2>& p2)
+{
+	return (p1.first <= p2.first && p1.second <= p2.second);
+}
 
 template <class T1, class T2>
-bool operator>(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) { return (lhs.first > rhs.first && lhs.second > rhs.second); };
+bool operator>(const pair<T1,T2>& p1, const pair<T1,T2>& p2) 
+{
+	return (p1.first > p2.first && p1.second > p2.second);
+}
 
 template <class T1, class T2>
-bool operator>=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) { return (lhs.first >= rhs.first && lhs.second >= rhs.second); };
+bool operator>=(const pair<T1,T2>& p1, const pair<T1,T2>& p2)
+{
+	return (p1.first >= p2.first && p1.second >= p2.second);
+}
 
 template <class T1,class T2>
-pair<T1,T2> make_pair (T1 x, T2 y) { return ( pair<T1,T2>(x,y) ); };
+pair<T1,T2> make_pair (T1 x, T2 y)
+{
+	return ( pair<T1,T2>(x,y) );
+}
 
 }
 

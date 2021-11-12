@@ -24,7 +24,7 @@ namespace ft
 			typedef size_t										size_type;
 			typedef ft::node<value_type>						node_type;
 			typedef node_type*									node_ptr;
-		
+
 			typedef ft::map_iterator<value_type, node_type >		iterator;
 			typedef ft::map_iterator<const value_type, node_type >	const_iterator;
 			typedef ft::reverse_iterator<iterator>					reverse_iterator;
@@ -165,6 +165,7 @@ namespace ft
 			/*
 			**	Modifiers
 			*/
+
 			pair<iterator,bool> insert(const value_type& val)
 			{
 				ft::pair<iterator, bool>	ret;
@@ -448,14 +449,14 @@ namespace ft
 
 			node_ptr								_newNode(value_type& val)
 			{
-				node_ptr tmp = _nodeAlloc.allocate(1);
-				_pairAlloc.construct(&tmp->tab, val);
+				node_ptr newNode = _nodeAlloc.allocate(1);
+				_pairAlloc.construct(&newNode->tab, val);
 
-				tmp->left = NULL;
-				tmp->right = NULL;
-				tmp->parent = NULL;
+				newNode->left = NULL;
+				newNode->right = NULL;
+				newNode->parent = NULL;
 
-				return tmp;
+				return newNode;
 			}
 
 			node_ptr								_deleteNode(node_ptr root, value_type val);

@@ -1,4 +1,3 @@
-
 all:
 	clang++ -Wall -Wextra -Werror -fsanitize=address testers/*.cpp -std=c++98
 

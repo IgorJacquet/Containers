@@ -6,7 +6,7 @@
 /*   By: ijacquet <ijacquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 15:03:29 by ijacquet          #+#    #+#             */
-/*   Updated: 2021/11/12 15:03:30 by ijacquet         ###   ########.fr       */
+/*   Updated: 2021/11/12 17:05:58 by ijacquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ namespace ft
 
 			class value_compare
 			{
-				friend class map;
 				public:
 					Compare comp;
 					value_compare (Compare c) : comp(c) {}
@@ -80,13 +79,13 @@ namespace ft
 			};
 
 			map& operator=(const map& x)
-		{
-			if (&x == this)
+			{
+				if (&x == this)
+					return (*this);
+				this->clear();
+				this->insert(x.begin(), x.end());
 				return (*this);
-			this->clear();
-			this->insert(x.begin(), x.end());
-			return (*this);
-		}
+			}
 
 			~map()
 			{
@@ -242,28 +241,10 @@ namespace ft
 
 				void swap(map& x)
 			{
-				map<Key, T, Compare, Alloc>	tmp;
+				map<Key, T, Compare, Alloc>	tmp = *this;
 
-				tmp._comp = _comp;
-				tmp._pairAlloc = _pairAlloc;
-				tmp._root = _root;
-				tmp._ghost = _ghost;
-				tmp._lastElem = _lastElem;
-				tmp._size = _size;
-
-				_comp = x._comp;
-				_pairAlloc = x._pairAlloc;
-				_root = x._root;
-				_ghost = x._ghost;
-				_lastElem = x._lastElem;
-				_size = x._size;
-
-				x._comp = tmp._comp;
-				x._pairAlloc = tmp._pairAlloc;
-				x._root = tmp._root;
-				x._ghost = tmp._ghost;
-				x._lastElem = tmp._lastElem;
-				x._size = tmp._size;
+				*this = x;
+				x = tmp;
 			}
 
 			void clear()
@@ -415,10 +396,10 @@ namespace ft
 			}
 
 		private:
+			typedef typename allocator_type::template rebind<node<value_type> >::other _nodeAlloc;
+			typedef node<value_type>				element_type;
+			node<value_type>						*_endlist;
 			allocator_type							_pairAlloc;
-		typedef typename allocator_type::template rebind<node<value_type> >::other _nodeAlloc;
-		typedef node<value_type> element_type;
-		node<value_type> *_endlist;
 			key_compare								_comp;
 			size_type								_size;
 			node_ptr								_root;

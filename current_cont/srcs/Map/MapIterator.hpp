@@ -6,7 +6,7 @@
 /*   By: ijacquet <ijacquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 15:03:32 by ijacquet          #+#    #+#             */
-/*   Updated: 2021/11/12 15:03:32 by ijacquet         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:40:04 by ijacquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@ namespace ft
     template<typename T, typename node>
     class map_iterator
     {
-		protected:
-			node	*_node;
-			map_iterator(node *src)
-			{
-				_node = src;
-			}
-
         public:
 			typedef	T					value_type;
 			typedef	value_type&			reference;
@@ -34,6 +27,11 @@ namespace ft
 			typedef	value_type*			pointer;
 			typedef ptrdiff_t			difference_type;
 			typedef node*				node_ptr;
+			node	*_node;
+			map_iterator(node *src)
+			{
+				_node = src;
+			}
 
 			map_iterator() : _node(NULL)
 			{
@@ -130,9 +128,6 @@ namespace ft
 			{
 				return &this->_node->tab;
 			}
-
-			template <class, class, class, class>
-			friend class map;
     };
 }
 

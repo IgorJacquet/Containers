@@ -418,7 +418,6 @@ void	test_vct_clear()
 
 void	test_vct_swap()
 {
-
 	print_title("Swap / Extern Swap");
 	ft::vector<int> my1;
 	ft::vector<int> my2;
@@ -446,10 +445,20 @@ void	test_vct_swap()
 	real2.push_back(19);
 	real2.push_back(101);
 	real2.push_back(42);
+
+	ft::vector<int>::iterator myIt = my1.begin();
+	std::vector<int>::iterator realIt = real1.begin();
+	check("Iterators before", (*myIt == *realIt));
+
 	my1.swap(my2);
 	real1.swap(real2);
+
 	check("Swap", (my1 == real1));
 	check("Swap", (my2 == real2));
+
+	check("Iterators after", (*myIt == *realIt));
+	check("Iterators after ++", (*(myIt++) == *(realIt++)));
+
 	my1.swap(my2);
 	real1.swap(real2);
 	check("Swap", (my1 == real1));

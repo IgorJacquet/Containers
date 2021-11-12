@@ -39,6 +39,13 @@ void 	test_stack_constructor()
 		check("pop", (my1 == real1));
 	}
 	check("Empty + size", (my1 == real1));
+	std::deque<int> test (3,100);
+	std::stack<int,std::deque<int> > test0 (test);
+	std::list<int> test1 (3, 20);
+	ft::stack<int,std::list<int> > test2 (test1);
+	std::vector<int> test3 (4, 10);
+	ft::stack<int,std::vector<int> > test4 (test3);
+	check("containers compatible", 1);
 }
 
 void	test_stack_operators()

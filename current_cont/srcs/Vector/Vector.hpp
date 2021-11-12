@@ -6,7 +6,7 @@
 /*   By: ijacquet <ijacquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 15:03:46 by ijacquet          #+#    #+#             */
-/*   Updated: 2021/11/12 15:03:46 by ijacquet         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:11:12 by ijacquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ class	vector
 		typedef ptrdiff_t									difference_type;
 		typedef size_t										size_type;
 		
-		/*****************/
-		/*** ITERATORS ***/
-		/*****************/
+		/*
+		** ITERATORS
+		*/
 
 		class iterator : public Random<value_type>
 		{
@@ -250,9 +250,9 @@ class	vector
 		typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 		typedef ft::reverse_iterator<iterator>				reverse_iterator;
 
-		/**********************/
-		/**	MEMBER FUNCTIONS **/
-		/**********************/
+		/*
+		**	MEMBER FUNCTIONS
+		*/
 		
 		explicit vector(const allocator_type& alloc = allocator_type()) : _tab(NULL), _size(0), _max_size(alloc.max_size()), _alloc(alloc), _capacity(0)
 		{
@@ -468,6 +468,7 @@ class	vector
 		/*
 		**	Modifiers
 		*/
+	
 		template <class InputIterator>
   		void 		assign(typename ft::enable_if<!std::numeric_limits<InputIterator>::is_integer, InputIterator>::type first, InputIterator last)
 		{
@@ -615,6 +616,7 @@ class	vector
 		/*
 		**	Allocator
 		*/
+	
 		allocator_type get_allocator() const
 		{
 			return this->_alloc;

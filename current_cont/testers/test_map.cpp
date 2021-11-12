@@ -167,7 +167,12 @@ void	test_map_iterators()
 	insert_map_values(my1, real1);
 	myIt = my1.begin();
 	realIt = real1.begin();
-	check("Iterator", check_it(myIt, my1.end(), realIt));
+	check("Iterator after insert", check_it(myIt, my1.end(), realIt));
+
+	my1.erase('1');
+	real1.erase('1');
+
+	check("Iterator after erase", check_it(myIt, my1.end(), realIt));
 
 	ft::map<int, std::string>::reverse_iterator myItr = my1.rbegin();
 	std::map<int, std::string>::reverse_iterator realItr = real1.rbegin();

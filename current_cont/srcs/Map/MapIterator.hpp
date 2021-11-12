@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   MapIterator.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijacquet <ijacquet@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/12 15:03:32 by ijacquet          #+#    #+#             */
+/*   Updated: 2021/11/12 15:03:32 by ijacquet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAPITERATOR_HPP
 # define MAPITERATOR_HPP
 
@@ -10,7 +22,10 @@ namespace ft
     {
 		protected:
 			node	*_node;
-			map_iterator(node *src) { _node = src; return ;};
+			map_iterator(node *src)
+			{
+				_node = src;
+			}
 
         public:
 			typedef	T					value_type;

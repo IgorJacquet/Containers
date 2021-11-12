@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Map.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijacquet <ijacquet@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/12 15:03:29 by ijacquet          #+#    #+#             */
+/*   Updated: 2021/11/12 15:03:30 by ijacquet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAP_HPP
 # define MAP_HPP
 
@@ -68,23 +80,21 @@ namespace ft
 			};
 
 			map& operator=(const map& x)
-			{
-				clear();
-				this->_comp = x._comp;
-				this->_nodeAlloc = x._nodeAlloc;
-				this->_pairAlloc = x._pairAlloc;
-				insert(x.begin(), x.end());
-				
-				return *this;
-			};
+		{
+			if (&x == this)
+				return (*this);
+			this->clear();
+			this->insert(x.begin(), x.end());
+			return (*this);
+		}
 
 			~map()
 			{
 				clear();
 				if (_root)
-					_nodeAlloc.deallocate(_root, _size);
+					_nodeAlloc().deallocate(_root, _size);
 				if (_ghost)
-					_nodeAlloc.deallocate(_ghost, 1);
+					_nodeAlloc().deallocate(_ghost, 1);
 
 				return ;
 			};
@@ -146,7 +156,7 @@ namespace ft
 
 			size_type max_size() const
 			{
-				return _nodeAlloc.max_size();
+				return _nodeAlloc().max_size();
 			}
 
 			bool empty() const
@@ -230,28 +240,25 @@ namespace ft
 				}
 			}
 
-			void swap(map& x)
+				void swap(map& x)
 			{
 				map<Key, T, Compare, Alloc>	tmp;
 
-				tmp._comp = this->_comp;
-				tmp._nodeAlloc = this->_nodeAlloc;
-				tmp._pairAlloc = this->_pairAlloc;
-				tmp._root = this->_root;
-				tmp._ghost = this->_ghost;
-				tmp._lastElem = this->_lastElem;
-				tmp._size = this->_size;
+				tmp._comp = _comp;
+				tmp._pairAlloc = _pairAlloc;
+				tmp._root = _root;
+				tmp._ghost = _ghost;
+				tmp._lastElem = _lastElem;
+				tmp._size = _size;
 
-				this->_comp = x._comp;
-				this->_nodeAlloc = x._nodeAlloc;
-				this->_pairAlloc = x._pairAlloc;
-				this->_root = x._root;
-				this->_ghost = x._ghost;
-				this->_lastElem = x._lastElem;
-				this->_size = x._size;
+				_comp = x._comp;
+				_pairAlloc = x._pairAlloc;
+				_root = x._root;
+				_ghost = x._ghost;
+				_lastElem = x._lastElem;
+				_size = x._size;
 
 				x._comp = tmp._comp;
-				x._nodeAlloc = tmp._nodeAlloc;
 				x._pairAlloc = tmp._pairAlloc;
 				x._root = tmp._root;
 				x._ghost = tmp._ghost;
@@ -409,7 +416,9 @@ namespace ft
 
 		private:
 			allocator_type							_pairAlloc;
-			std::allocator<ft::node<value_type> >	_nodeAlloc;
+		typedef typename allocator_type::template rebind<node<value_type> >::other _nodeAlloc;
+		typedef node<value_type> element_type;
+		node<value_type> *_endlist;
 			key_compare								_comp;
 			size_type								_size;
 			node_ptr								_root;
@@ -449,12 +458,8 @@ namespace ft
 
 			node_ptr								_newNode(value_type& val)
 			{
-				node_ptr newNode = _nodeAlloc.allocate(1);
-				_pairAlloc.construct(&newNode->tab, val);
-
-				newNode->left = NULL;
-				newNode->right = NULL;
-				newNode->parent = NULL;
+				node<value_type> *newNode = _nodeAlloc().allocate(1);
+				_nodeAlloc().construct(newNode, node<value_type>(val));
 
 				return newNode;
 			}
@@ -464,7 +469,7 @@ namespace ft
 			void									_setGhost(bool add)
 			{
 				if (!_ghost)
-					_ghost = _nodeAlloc.allocate(1);
+					_ghost = _nodeAlloc().allocate(1);
 				if (add)
 				{
 					_lastElem = maxValueNode(_root);

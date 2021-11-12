@@ -5,17 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijacquet <ijacquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 11:33:45 by ijacquet          #+#    #+#             */
-/*   Updated: 2021/10/18 11:33:45 by ijacquet         ###   ########.fr       */
+/*   Created: 2021/11/12 15:04:06 by ijacquet          #+#    #+#             */
+/*   Updated: 2021/11/12 15:04:06 by ijacquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tester.hpp"
 #include <map>
-
-/*
-** constructor copy etc
-*/
+#include <sys/time.h>
 
 template <class Key, class Val>
 void print_map_values(ft::map<Key, Val> &m, std::string name)
@@ -45,19 +42,60 @@ void print_vraie_map_values(std::map<Key, Val> &m, std::string name)
 
 void insert_map_values(ft::map<int, std::string> &m, std::map<int, std::string> &m2)
 {
-	m.insert(ft::pair<int, std::string>(1, "Julou"));
-	m.insert(ft::pair<int, std::string>(2, "julou22"));
-	m.insert(ft::pair<int, std::string>(6, "six"));
-	m.insert(ft::pair<int, std::string>(8, "mathildou"));
-	m.insert(ft::pair<int, std::string>(10, "olaaa"));
-	m.insert(ft::pair<int, std::string>(7, "bjr"));
+	struct timeval    todms;
 
-	m2.insert(std::pair<int, std::string>(1, "Julou"));
-	m2.insert(std::pair<int, std::string>(2, "julou22"));
-	m2.insert(std::pair<int, std::string>(6, "six"));
-	m2.insert(std::pair<int, std::string>(8, "mathildou"));
-	m2.insert(std::pair<int, std::string>(10, "olaaa"));
-	m2.insert(std::pair<int, std::string>(7, "bjr"));
+    gettimeofday(&todms, NULL);
+    std::cout << "Base time = " << todms.tv_usec << std::endl;
+
+	ft::pair <int,std::string>			foo;
+  	ft::pair <int,std::string>			bar;
+	ft::pair <int,std::string>			foo1;
+  	ft::pair <int,std::string>			bar1;
+	ft::pair <int,std::string>			foo2;
+  	ft::pair <int,std::string>			bar2;
+	
+	foo = ft::make_pair(2, "ca");
+  	bar = ft::make_pair(8, "phrase");
+	foo1 = ft::make_pair(1, "Normalement");
+  	bar1 = ft::make_pair(7, "une");
+	foo2 = ft::make_pair(6, "fait");
+  	bar2 = ft::make_pair(10, "correcte");	
+
+	m.insert(foo);
+	m.insert(bar);
+	m.insert(foo1);
+	m.insert(bar1);
+	m.insert(foo2);
+	m.insert(bar2);
+
+
+    gettimeofday(&todms, NULL);
+    std::cout << "Time 1 = " << todms.tv_usec << std::endl;
+
+	
+	std::pair <int,std::string>			foo3;
+  	std::pair <int,std::string>			bar3;
+	std::pair <int,std::string>			foo4;
+  	std::pair <int,std::string>			bar4;
+	std::pair <int,std::string>			foo5;
+  	std::pair <int,std::string>			bar5;
+	
+	foo3 = std::make_pair(2, "ca");
+  	bar3 = std::make_pair(8, "phrase");
+	foo4 = std::make_pair(1, "Normalement");
+  	bar4 = std::make_pair(7, "une");
+	foo5 = std::make_pair(6, "fait");
+  	bar5 = std::make_pair(10, "correcte");	
+
+	m2.insert(foo3);
+	m2.insert(bar3);
+	m2.insert(foo4);
+	m2.insert(bar4);
+	m2.insert(foo5);
+	m2.insert(bar5);
+	
+    gettimeofday(&todms, NULL);
+    std::cout << "Time 2 = " << todms.tv_usec << std::endl;
 }
 
 static bool	check_it(ft::map<int, std::string>::iterator myIt, ft::map<int, std::string>::iterator myEnd, std::map<int, std::string>::iterator realIt)
@@ -116,7 +154,7 @@ void    test_map_construct()
 	check("Assignation", (my4 == real4));
 }
 
-void	test_map_iterators() // A terminer
+void	test_map_iterators()
 {
 	print_title("Iterators");
 	ft::map<int, std::string>	my1;
@@ -157,8 +195,9 @@ void	test_map_iterators() // A terminer
 	ft::map<int, std::string>::const_reverse_iterator myItrc = my2.rbegin();
 	ft::map<int, std::string>::const_reverse_iterator myItrce = my2.rend();
 	std::map<int, std::string>::const_reverse_iterator realItrc = real2.rbegin();
+	std::map<int, std::string>::const_reverse_iterator realItrce = real2.rend();
 	ret = true;
-	while (myItrc != myItrce)
+	while (realItrc != realItrce)
 	{
 		if ((*myItrc).second != (*realItrc).second)
 			ret = false;
@@ -168,8 +207,6 @@ void	test_map_iterators() // A terminer
 		++realItrc;
 	}
 	check("Iterator rev const", ret);
-
-
 }
 
 void	test_map_capacity()
@@ -229,6 +266,7 @@ void	test_map_insert()
 	my2.insert(my1.begin(), my1.begin());
 	real2.insert(real1.begin(), real1.begin());
 	check("Insert range", (my2 == real2));
+
 }
 
 void 	test_map_erase()
@@ -356,10 +394,11 @@ void	test_map_operations()
 	std::map<int, std::string>	real1;
 
 	insert_map_values(my1, real1);
+
 	check("Find", (my1.find(1))->second, (real1.find(1))->second);
 	check("Find", (my1.find(6))->second, (real1.find(6))->second);
 	check("Find not found", (my1.find(30) == my1.end()), (real1.find(30) == real1.end()));
-	
+
 	check("count", my1.count(1), real1.count(1));
 	check("count", my1.count(2), real1.count(2));
 	check("count not found", my1.count(53), real1.count(53));
@@ -378,23 +417,32 @@ void	test_map_operations()
 	ft::pair<ft::map<int, std::string>::iterator, ft::map<int, std::string>::iterator> ret = my1.equal_range(40);
 	std::pair<std::map<int, std::string>::iterator, std::map<int, std::string>::iterator> ret2 = real1.equal_range(40);
 	check("Equal range not found", (ret.first == ret.second), (ret2.first == ret2.second));
+
+	std::cout << "\n\n";
+	print_map_values(my1, "int");
+	print_vraie_map_values(real1, "int");
 }
 
 void	test_map()
 {
 	print_header("MAP");
+
+	struct timeval    todms;
+
+    gettimeofday(&todms, NULL);
+    std::cout << "Global time start : " << todms.tv_usec << std::endl;
 	
-	test_map_construct();
-	P("");
 	test_map_iterators();
+	P("");
+	test_map_erase();
+	P("");
+	test_map_construct();
 	P("");
 	test_map_capacity();
 	P("");
 	test_map_elements_access();
 	P("");
 	test_map_insert();
-	P("");
-	test_map_erase();
 	P("");
 	test_map_swap();
 	P("");
@@ -404,4 +452,7 @@ void	test_map()
 	P("");
 	test_map_operations();
 	P("");
+
+    gettimeofday(&todms, NULL);
+    std::cout << "Global start end : " << todms.tv_usec << std::endl;
 }

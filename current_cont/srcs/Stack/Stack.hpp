@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Stack.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijacquet <ijacquet@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/12 15:03:24 by ijacquet          #+#    #+#             */
+/*   Updated: 2021/11/12 15:03:26 by ijacquet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STACK_HPP
 # define STACK_HPP
 
 # include <iostream>
-# include "../Vector/Vector_functions.hpp"
+# include "../Vector/Vector.hpp"
 
 namespace ft
 {

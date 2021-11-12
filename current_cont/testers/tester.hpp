@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tester.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: judecuyp <judecuyp@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ijacquet <ijacquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/11 01:17:47 by judecuyp          #+#    #+#             */
-/*   Updated: 2021/05/11 01:17:47 by judecuyp         ###   ########.fr       */
+/*   Created: 2021/11/12 15:04:48 by ijacquet          #+#    #+#             */
+/*   Updated: 2021/11/12 15:04:48 by ijacquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # include "../srcs/Utils/ReverseIterator.hpp"
 # include "../srcs/Utils/Utils.hpp"
 # include "../srcs/Vector/Vector.hpp"
-# include "../srcs/Vector/Vector_functions.hpp"
 
 # define RESET "\e[0m"
 # define RED "\e[91m"

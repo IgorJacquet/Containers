@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijacquet <ijacquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 11:33:34 by ijacquet          #+#    #+#             */
-/*   Updated: 2021/10/18 11:33:34 by ijacquet         ###   ########.fr       */
+/*   Created: 2021/11/12 15:03:56 by ijacquet          #+#    #+#             */
+/*   Updated: 2021/11/12 15:03:56 by ijacquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ void print_error()
 	std::cout << BOLD << RED << "Unkown command." << RESET << std::endl;
 	std::cout << "Pass the name of the test in argument."  << std::endl;
 	std::cout << "List of valid args : "  << std::endl;
-	std::cout << "- list"  << std::endl;
 	std::cout << "- stack"  << std::endl;
 	std::cout << "- vector"  << std::endl;
-	std::cout << "- queue"  << std::endl;
 	std::cout << "- map"  << std::endl;
 	std::cout << "- all"  << std::endl;
 }
@@ -105,20 +103,14 @@ int main(int argc, char **argv)
 
 	if (test == "all")
 	{
-		test_list();
 		test_stack();
 		test_vector();
-		test_queue();
 		test_map();
 	}
-	else if (test == "list")
-		test_list();
 	else if (test == "stack")
 		test_stack();
 	else if (test == "vector")
 		test_vector();
-	else if (test == "queue")
-		test_queue();
 	else if (test == "map")
 		test_map();
 	else
